@@ -6,8 +6,8 @@ const contratSchema = new Schema({
   users: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
   number: { type: Number },
   status: { type: String , enum:["pending", "active", "finished"]},
-  startDate: { type: Date, required: true, default: Date.now },
-  endDate: { type: Date },
+  dateStart: { type: Date, required: true, default: Date.now },
+  dateEnd: { type: Date },
   options: [{ type: Schema.Types.ObjectId, ref: "Option", required: true }],
 });
 

@@ -7,7 +7,8 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const cors = require("cors");
+// const cors = require("cors");
+const cron = require('node-cron');
 
 const app = express();
 
@@ -33,7 +34,15 @@ app.use(
   })
 ); // Establishes a session between client & server (via cookie)
 
-app.use("/user", require("./routes/users"));
+//run everyday at midnight
+cron.schedule('0 0 0 * * *', () => {
+    console.log('running a task every day');
+    console.log('today : ', Date.now);
+    
+    // Contrat.find({})
+  });
+
+app.use("/user", require("./routes/user"));
 // app.use("/api/auth", require("./routes/auth"));
 
 module.exports = app;
