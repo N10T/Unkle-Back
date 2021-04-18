@@ -60,7 +60,7 @@ router.patch("/option", isConnected, async (req, res, next) => {
       ).select("-password");
       res.status(200).json({ user: updatedUser });
     } else {
-      res.status(400).json({ subscribedOptions, message: "Unauthorized" });
+      res.status(401).json({ subscribedOptions, message: "Unauthorized" });
     }
   } catch (error) {
     next(error);
@@ -85,10 +85,10 @@ router.patch("/contract", isConnected, async (req, res, next) => {
 });
 
 /* DELETE user. */
-router.post("/:id", isAdmin, async (req, res, next) => {
+router.delete("/:id", isAdmin, async (req, res, next) => {
   try {
     await User.findByIdAndDelete(req.params.id);
-    res.status(201).json({ message: "User deleted" });
+    res.status(204).json({ message: "User deleted" });
   } catch (error) {
     next(error);
   }

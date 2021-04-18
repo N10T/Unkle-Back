@@ -15,7 +15,7 @@ router.get("/", isAdmin, async (req, res, next) => {
 });
 
 /* GET my contracts infos. */
-router.get("/my-contract", isConnected, async (req, res, next) => {
+router.get("/my-contracts", isConnected, async (req, res, next) => {
   try {
     const contracts = await Contract.find({ users: { $in: [req.session.currentUser._id] } }).select(
       "-users"

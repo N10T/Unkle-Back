@@ -1,19 +1,8 @@
-/* GET users listing. */
+# User route
 
-Prefixed route by 'api/user/'
-*  GET users listing : `GET /api/user/` | Need to be admin
-router.get("/", isAdmin, async (req, res, next) => {
+Prefixed route by `/api/user/`
 
-router.get("/my-profile", isConnected, async (req, res, next) => {
-
-router.post("/", isAdmin, async (req, res, next) => {
-
-router.patch("/option", isConnected, async (req, res, next) => {
-
-router.patch("/contract", isConnected, async (req, res, next) => {
-
-router.delete("/:id", isAdmin, async (req, res, next) => {
-
+### Table
 | METHOD    |    ENDPOINT   |  Code |  Auth required  | Description |
 |-----------|:-------------:|------:|----------------:|------------:|
 | GET       | /             | 200 | Admin             | All users   |
@@ -23,7 +12,7 @@ router.delete("/:id", isAdmin, async (req, res, next) => {
 | PATCH     | /contract     | 200 | Yes               |Delete option|
 | DELETE    | /:id          | 201 | Admin             | Delete user |
 
-### Get All users '/'
+### Get All users
 
 Get the details of all users without passwords.
 
@@ -33,13 +22,15 @@ Get the details of all users without passwords.
 
 **Auth required** : YES as Admin
 
-## Success Response
+##### Success Response
 
 **Code** : `200 OK`
+**JSON** : Users found
 
-## Failed Response
+##### Failed Response
 
 **Code** : `401 Unauthorized`
+
 -
 
 
@@ -53,13 +44,15 @@ Get the details of the user connected without password.
 
 **Auth required** : YES
 
-## Success Response
+##### Success Response
 
 **Code** : `200 OK`
+**JSON** : User found
 
-## Failed Response
+##### Failed Response
 
 **Code** : `401 Unauthorized`
+
 -
 
 
@@ -73,11 +66,12 @@ Create one user.
 
 **Auth required** : Admin
 
-## Success Response
+##### Success Response
 
 **Code** : `201 Created`
+**JSON** : Created user
 
-## Failed Response
+##### Failed Response
 
 **Code** : `401 Unauthorized`
 
@@ -91,6 +85,7 @@ Create one user.
   "options": [{ type: Schema.Types.ObjectId, ref: "Option"}]
 }
 ```
+
 -
 
 
@@ -104,11 +99,12 @@ Add option selected by user and verify if the current user don't already have it
 
 **Auth required** : Yes
 
-## Success Response
+##### Success Response
 
 **Code** : `200 OK`
+**JSON** : Updated user
 
-## Failed Response
+##### Failed Response
 
 **Code** : `401 Unauthorized`
 
@@ -119,6 +115,7 @@ Add option selected by user and verify if the current user don't already have it
   "options": [{ type: Schema.Types.ObjectId, ref: "Option"}]
 }
 ```
+
 -
 
 
@@ -132,13 +129,14 @@ Add option selected by user and verify if the current user don't already have it
 
 **Auth required** : Yes
 
-## Success Response
+##### Success Response
 
 **Code** : `200 OK`
 
-## Failed Response
+##### Failed Response
 
 **Code** : `401 Unauthorized`
+**JSON** : Updated user
 
 **Request constraints**
 
@@ -147,6 +145,7 @@ Add option selected by user and verify if the current user don't already have it
   "contract": [{ type: Schema.Types.ObjectId, ref: "Contract"}]
 }
 ```
+
 -
 
 
@@ -160,17 +159,13 @@ Add option selected by user and verify if the current user don't already have it
 
 **Auth required** : Admin
 
-## Success Response
+##### Success Response
 
 **Code** : `204 No Content`
+**JSON** : Updated user
 
-## Failed Response
+##### Failed Response
 
 **Code** : `401 Unauthorized`
--
 
-/my-profile  
-/            
-/option      
-/contract    
-/:id         
+-       
