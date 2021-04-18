@@ -15,9 +15,9 @@ router.get("/", isAdmin, async (req, res, next) => {
 });
 
 /* GET user info. */
-router.get("/:id", isConnected, async (req, res, next) => {
+router.get("/my-profile", isConnected, async (req, res, next) => {
   try {
-    const user = await User.findById(req.session.currentUser._id);
+    const user = await User.findById(req.session.currentUser._id).select("-password");
     res.status(200).json({ user });
   } catch (error) {
     next(error);
@@ -27,37 +27,58 @@ router.get("/:id", isConnected, async (req, res, next) => {
 /* POST create user. */
 router.post("/", isAdmin, async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const user = await User.create(req.body).select("-password");
     res.status(201).json({ user });
   } catch (error) {
     next(error);
   }
 });
 
-/* PATCH create user. */
-router.patch("/", isConnected, async (req, res, next) => {
+/* Add unique options in user */
+router.patch("/option", isConnected, async (req, res, next) => {
   const selectedOptions = req.body.options;
-  console.log("selectedOptions :",selectedOptions);
+  console.log("selectedOptions :", selectedOptions);
   const userId = req.session.currentUser._id;
-  
+
   try {
-    const user = await User.findById(req.session.currentUser._id);
+    const user = await User.findById(req.session.currentUser._id).select("-password");
     console.log("user:", user);
 
     const subscribedOptions = user.options.reduce((acc, option) => {
       selectedOptions.forEach((selectedOption) => {
-        console.log(option,selectedOption);
+        console.log(option, selectedOption);
         if (option == selectedOption) acc = [...acc, option];
       });
       return acc;
     }, []);
-    console.log("subscribedOptions",subscribedOptions);
+    console.log("subscribedOptions", subscribedOptions);
     if (subscribedOptions.length === 0) {
-      const updatedUser = await User.findByIdAndUpdate(userId, { $push: { options: { $each: selectedOptions } } }, {new:true});
-      res.status(200).json({ user : updatedUser });
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { $push: { options: { $each: selectedOptions } } },
+        { new: true }
+      ).select("-password");
+      res.status(200).json({ user: updatedUser });
     } else {
-      res.status(400).json({ subscribedOptions, message:"Unauthorized" });
+      res.status(400).json({ subscribedOptions, message: "Unauthorized" });
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+/* Add contract in user */
+router.patch("/contract", isConnected, async (req, res, next) => {
+  const contractId = req.body.contract;
+  const userId = req.session.currentUser._id;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $push: { contracts: contractId } },
+      { new: true }
+    ).select("-password");
+    res.status(200).json({ user: updatedUser });
+
   } catch (error) {
     next(error);
   }
