@@ -2,36 +2,36 @@ const express = require("express");
 const router = express.Router();
 const isAdmin = require("../middlewares/protectAdmin");
 const isConnected = require("../middlewares/protectAuth");
-const Contrat = require("../models/Contrat");
+const Contract = require("../models/Contract");
 
-/* GET contrat listing. */
+/* GET contract listing. */
 router.get("/", isAdmin, async (req, res, next) => {
   try {
-    const contrats = await Contrat.find();
-    res.status(200).json({ contrats });
+    const contracts = await Contract.find();
+    res.status(200).json({ contracts });
   } catch (error) {
     next(error);
   }
 });
 
-/* GET my contrats infos. */
-router.get("/my-contrat", isConnected, async (req, res, next) => {
+/* GET my contracts infos. */
+router.get("/my-contract", isConnected, async (req, res, next) => {
   try {
-    const contrats = await Contrat.find({ users: { $in: [req.session.currentUser._id] } }).select(
+    const contracts = await Contract.find({ users: { $in: [req.session.currentUser._id] } }).select(
       "-users"
     );
-    res.status(200).json({ contrats });
+    res.status(200).json({ contracts });
   } catch (error) {
     next(error);
   }
 });
 
-/* POST create contrat. */
+/* POST create contract. */
 router.post("/", isAdmin, async (req, res, next) => {
   console.log(req.body);
   try {
-    const contrat = await Contrat.create(req.body);
-    res.status(201).json({ contrat });
+    const contract = await Contract.create(req.body);
+    res.status(201).json({ contract });
   } catch (error) {
     next(error);
   }
@@ -43,14 +43,14 @@ router.patch("/:id/subscribe", isConnected, async (req, res, next) => {
     req.session.currentUser.type === "admin" ? req.body.user : req.session.currentUser._id;
 
   try {
-    const contrat = await Contrat.findByIdAndUpdate(
+    const contract = await Contract.findByIdAndUpdate(
       req.params.id,
       {
         $push: { users: user },
       },
       { new: true }
     );
-    res.status(201).json({ message: "User add in contrat", contrat });
+    res.status(201).json({ message: "User add in contract", contract });
   } catch (error) {
     next(error);
   }
@@ -66,7 +66,7 @@ router.patch("/:id/unsubscribe", isConnected, async (req, res, next) => {
     return res.status(400).json({ message: "Date >= unsubscribing date / quit date :" + dateQuit });
   }
   try {
-    const contrat = await Contrat.findByIdAndUpdate(
+    const contract = await Contract.findByIdAndUpdate(
       req.params.id,
       {
         $pull: { users: user },
@@ -74,7 +74,7 @@ router.patch("/:id/unsubscribe", isConnected, async (req, res, next) => {
       },
       { new: true }
     );
-    res.status(201).json({ message: "User deleted in contrat", contrat });
+    res.status(201).json({ message: "User deleted in contract", contract });
   } catch (error) {
     next(error);
   }

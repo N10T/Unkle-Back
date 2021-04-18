@@ -9,7 +9,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 // const cors = require("cors");
 const cron = require('node-cron');
-const Contrat = require("./models/Contrat");
+const Contract = require("./models/Contract");
 
 const app = express();
 
@@ -43,19 +43,19 @@ cron.schedule('0 0 0 * * *', async () => {
   console.log('running a task every day');
   console.log('today : ', today);
   try {
-    const activeContrat = await Contrat.updateMany({dateStart:today},{status:"active"})
-    console.log('pending to active =>', activeContrat);
-    const finishedContrat = await Contrat.updateMany({dateEnd:tomorrow},{status:"finished"})
-    console.log('active to finish =>', finishedContrat);
+    const activeContract = await Contract.updateMany({dateStart:today},{status:"active"})
+    console.log('pending to active =>', activeContract);
+    const finishedContract = await Contract.updateMany({dateEnd:tomorrow},{status:"finished"})
+    console.log('active to finish =>', finishedContract);
   } catch (error) {
     console.error(error);
   }
   });
 
-app.use("/auth", require("./routes/auth"));
-app.use("/user", require("./routes/user"));
-app.use("/contrat", require("./routes/contrat"));
-app.use("/option", require("./routes/option"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/user", require("./routes/user"));
+app.use("/api/contract", require("./routes/contract"));
+app.use("/api/option", require("./routes/option"));
 // app.use("/api/auth", require("./routes/auth"));
 
 module.exports = app;

@@ -24,7 +24,7 @@ router.put("/:id", isConnected, async (req, res, next) => {
             options = await Option.findByIdAndUpdate(optionId,{ $push: { users: userId } }, {new:true})
             res.status(200).json({ options });
         } else {
-            res.status(400).json({ message : "User have already subscribe this contrat" });
+            res.status(400).json({ message : "User have already subscribe this contract" });
         }
 
     } catch (error) {
