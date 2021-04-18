@@ -9,7 +9,7 @@ Prefixed route by `/api/contract/`
 | GET       | /my-contracts | 200   | Yes               | My contracts  |
 | POST      | /             | 201   | Admin             | Create        |
 | PATCH     | /:id/subscribe| 200   | Yes               | Add contract      |
-| PATCH     | /contract     | 200   | Yes               | Delete contract   |
+| PATCH     | /:id/unsubscribe| 200   | Yes               | Delete contract   |
 
 ### Get All contracts
 
