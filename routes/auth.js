@@ -17,38 +17,29 @@ router.post("/signin", async (req, res, next) => {
     if (!isValidPassword) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
-    req.session.currentUser = userInDB._id; // We only need the user's id in order to do any crud operation
-    res.redirect("/isLoggedIn");
+    const userForRes = {
+      _id: userInDB._id,
+      type: userInDB.type
+    };
+
+    req.session.currentUser = userForRes
+
+    res.status(200).json(userForRes);
   } catch (error) {
     res.status(500).json(error);
   }
 });
 
 router.post("/signup", async (req, res, next) => {
-  const { email, password, username } = req.body;
+  const { email, password, type } = req.body;
   const userInDB = await User.findOne({ email });
   if (userInDB) {
     return res.status(400).json({ message: "Email already taken" });
   } else {
     const hashedPassword = await bcrypt.hash(password, salt);
-    const newUser = { email, password: hashedPassword, username };
-    const createdUser = await User.create(newUser);
-    res.sendStatus(201);
-  }
-});
-
-router.get("/isLoggedIn", async (req, res, next) => {
-  try {
-    if (!req.session.currentUser) {
-      return res.status(401).json({ message: "Unauthorized" });
-    } else {
-      const user = await User.findById(req.session.currentUser).select(
-        "-password"
-      );
-      res.status(200).json(user);
-    }
-  } catch (error) {
-    res.status(500).json(error);
+    const newUser = { email, password: hashedPassword, type };
+    const {id} = await User.create(newUser);
+    res.status(201).json({id , type});
   }
 });
 

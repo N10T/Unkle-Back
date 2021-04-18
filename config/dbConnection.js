@@ -5,6 +5,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
+    useFindAndModify:false,
   })
   .then((x) => {
     console.log(`Yay connected to the DB ! ${x.connection.name}`);

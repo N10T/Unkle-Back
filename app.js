@@ -9,6 +9,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 // const cors = require("cors");
 const cron = require('node-cron');
+const Contrat = require("./models/Contrat");
 
 const app = express();
 
@@ -35,14 +36,26 @@ app.use(
 ); // Establishes a session between client & server (via cookie)
 
 //run everyday at midnight
-cron.schedule('0 0 0 * * *', () => {
-    console.log('running a task every day');
-    console.log('today : ', Date.now);
-    
-    // Contrat.find({})
+cron.schedule('0 0 0 * * *', async () => {
+  const today = new Date();
+  const tomorrow = new Date(today)
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  console.log('running a task every day');
+  console.log('today : ', today);
+  try {
+    const activeContrat = await Contrat.updateMany({dateStart:today},{status:"active"})
+    console.log('pending to active =>', activeContrat);
+    const finishedContrat = await Contrat.updateMany({dateEnd:tomorrow},{status:"finished"})
+    console.log('active to finish =>', finishedContrat);
+  } catch (error) {
+    console.error(error);
+  }
   });
 
+app.use("/auth", require("./routes/auth"));
 app.use("/user", require("./routes/user"));
+app.use("/contrat", require("./routes/contrat"));
+app.use("/option", require("./routes/option"));
 // app.use("/api/auth", require("./routes/auth"));
 
 module.exports = app;

@@ -2,13 +2,12 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const optionSchema = new Schema({
   name: {type:String, required: true, unique:"true", enum:["tout risque", "vol uniquement", "incendie uniquement", "cambriolage","évènement météorologique"]},
   description: {type:String},
-  users:[{ type: Schema.Types.ObjectId, ref: "User" }]
   //_id will be the unique id I will use
 });
 
-const User = mongoose.model("Contrat", userSchema);
+const Option = mongoose.model("Option", optionSchema);
 
-module.exports = User;
+module.exports = Option;
