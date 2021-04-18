@@ -30,7 +30,7 @@ Get all contracts.
 
 **Code** : `401 Unauthorized`
 
--
+
 
 
 ### Get one contract
@@ -52,7 +52,7 @@ Get the contracts of the user connected.
 
 **Code** : `401 Unauthorized`
 
--
+
 
 
 ### Create one contract
@@ -88,7 +88,7 @@ Create one contract.
 }
 ```
 
--
+
 
 
 ### Add user in contract 
@@ -123,7 +123,7 @@ Id of the contract to udate
 }
 ```
 
--
+
 
 
 ### Delete user in contract 
@@ -159,5 +159,3 @@ Id of the contract to udate
   "dateQuit": { type: Date },
 }
 ```
-
--

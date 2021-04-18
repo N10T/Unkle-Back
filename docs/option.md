@@ -22,4 +22,4 @@ Get all options.
 **Code** : `200 OK`
 **JSON** : Options found
 
--
+

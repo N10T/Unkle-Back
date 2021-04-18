@@ -24,15 +24,6 @@ router.get("/my-profile", isConnected, async (req, res, next) => {
   }
 });
 
-/* POST create user. */
-router.post("/", isAdmin, async (req, res, next) => {
-  try {
-    const user = await User.create(req.body).select("-password");
-    res.status(201).json({ user });
-  } catch (error) {
-    next(error);
-  }
-});
 
 /* Add unique options in user */
 router.patch("/option", isConnected, async (req, res, next) => {

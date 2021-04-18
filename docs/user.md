@@ -7,7 +7,6 @@ Prefixed route by `/api/user/`
 |-----------|:-------------:|------:|----------------:|------------:|
 | GET       | /             | 200 | Admin             | All users   |
 | GET       | /my-profile   | 200 | Yes               | One user    |
-| POST      | /             | 201 | Admin             | Create      |
 | PATCH     | /option       | 200 | Yes               | Add option  |
 | PATCH     | /contract     | 200 | Yes               |Delete option|
 | DELETE    | /:id          | 201 | Admin             | Delete user |
@@ -31,7 +30,7 @@ Get the details of all users without passwords.
 
 **Code** : `401 Unauthorized`
 
--
+
 
 
 ### Get one user
@@ -53,40 +52,7 @@ Get the details of the user connected without password.
 
 **Code** : `401 Unauthorized`
 
--
 
-
-### Create one user
-
-Create one user.
-
-**URL** : `/api/user/`
-
-**Method** : `POST`
-
-**Auth required** : Admin
-
-##### Success Response
-
-**Code** : `201 Created`
-**JSON** : Created user
-
-##### Failed Response
-
-**Code** : `401 Unauthorized`
-
-**Request constraints**
-
-```json
-{
-  "email": { type: String, required: true, unique: true },
-  "password": { type: String, required: true },
-  "type": { type: String, required: true, enum:["user","admin"]},
-  "options": [{ type: Schema.Types.ObjectId, ref: "Option"}]
-}
-```
-
--
 
 
 ### Add unique options in user 
@@ -116,7 +82,7 @@ Add option selected by user and verify if the current user don't already have it
 }
 ```
 
--
+
 
 
 ### Add contract in user 
@@ -146,7 +112,6 @@ Add option selected by user and verify if the current user don't already have it
 }
 ```
 
--
 
 
 ### Delete one user 
@@ -168,4 +133,4 @@ Add option selected by user and verify if the current user don't already have it
 
 **Code** : `401 Unauthorized`
 
--       
+      
