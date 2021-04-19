@@ -11,7 +11,7 @@ Prefixed route by `/api/user/`
 | PATCH     | /contract     | 200 | Yes               |Delete option|
 | DELETE    | /:id          | 201 | Admin             | Delete user |
 
-### Get All users
+# Get All users
 
 Get the details of all users without passwords.
 
@@ -33,7 +33,7 @@ Get the details of all users without passwords.
 
 
 
-### Get one user
+# Get one user
 
 Get the details of the user connected without password.
 
@@ -55,7 +55,7 @@ Get the details of the user connected without password.
 
 
 
-### Add unique options in user 
+# Add unique options in user 
 
 Add option selected by user and verify if the current user don't already have it.
 
@@ -85,7 +85,7 @@ Add option selected by user and verify if the current user don't already have it
 
 
 
-### Add contract in user 
+# Add contract in user 
 
 Add option selected by user and verify if the current user don't already have it.
 
@@ -114,7 +114,7 @@ Add option selected by user and verify if the current user don't already have it
 
 
 
-### Delete one user 
+# Delete one user 
 
 Add option selected by user and verify if the current user don't already have it.
 

@@ -7,7 +7,7 @@ Prefixed route by `/api/option/`
 |-----------|:---------------:|------:|----------------:|------------:|
 | GET       | /               | 200   | No              | All options |
 
-### Get All options
+# Get All options
 
 Get all options.
 

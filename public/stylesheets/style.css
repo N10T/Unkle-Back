@@ -1,5 +1,6 @@
 body {
-  padding: 50px;
+  display: grid;
+  place-items: center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 

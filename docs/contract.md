@@ -11,7 +11,7 @@ Prefixed route by `/api/contract/`
 | PATCH     | /:id/subscribe| 200   | Yes               | Add contract      |
 | PATCH     | /:id/unsubscribe| 200   | Yes               | Delete contract   |
 
-### Get All contracts
+# Get All contracts
 
 Get all contracts.
 
@@ -33,7 +33,7 @@ Get all contracts.
 
 
 
-### Get one contract
+# Get one contract
 
 Get the contracts of the user connected.
 
@@ -55,7 +55,7 @@ Get the contracts of the user connected.
 
 
 
-### Create one contract
+# Create one contract
 
 Create one contract.
 
@@ -91,7 +91,7 @@ Create one contract.
 
 
 
-### Add user in contract 
+# Add user in contract 
 
 Add user connected if user is client
 Add user send if user is admin
@@ -126,7 +126,7 @@ Id of the contract to udate
 
 
 
-### Delete user in contract 
+# Delete user in contract 
 
 Delete user connected if user is client
 Delete user send if user is admin
