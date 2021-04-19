@@ -13,7 +13,7 @@ Prefixed route by `/api/user/`
 
 Authentification work with a cookie session and encrypted password
 
-### Create one user
+# Create one user
 
 Create one user.
 
@@ -45,7 +45,7 @@ Create one user.
 
 
 
-### Connect one user
+# Connect one user
 
 Create one user.
 
@@ -76,7 +76,7 @@ Create one user.
 
 
 
-### Get one user
+# Get one user
 
 Get the details of the user connected without password.
 
@@ -98,7 +98,7 @@ Get the details of the user connected without password.
 
 
 
-### Create one user
+# Create one user
 
 Create one user.
 
